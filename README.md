@@ -66,24 +66,7 @@ Using MVC provides several advantages:
 
 ### Laravel Request Flow
 
-```text
-Browser
-   │
-   ▼
-Route (web.php)
-   │
-   ▼
-Controller (CompanyController)
-   │
-   ▼
-Blade View (pages/home.blade.php)
-   │
-   ▼
-HTML Response
-   │
-   ▼
-Browser
-```
+![Laravel MVC Architecture](documentation/laravel-mvc-architecture.png)
 
 ---
 
@@ -136,7 +119,7 @@ Route::get('/contact', [CompanyController::class, 'contact'])->name('contact');
 
 ### Route Screenshot
 
-`screenshots/routes_web.png`
+![Route Definitions](screenshots/routes_web.png)
 
 ---
 
@@ -193,7 +176,7 @@ Each method returns a Blade view from the `resources/views/pages/` directory.
 
 ### Controller Screenshot
 
-`screenshots/company_controller.png`
+![CompanyController](screenshots/company_controller.png)
 
 ---
 
@@ -271,7 +254,7 @@ The `@include` directive inserts another Blade file into the current view. It is
 
 ### Blade Layout Screenshot
 
-`screenshots/blade_layout.png`
+![Blade Layout](screenshots/blade_layout.png)
 
 ---
 
@@ -292,17 +275,32 @@ The `@include` directive inserts another Blade file into the current view. It is
 
 The following screenshots document the completed company profile website and important parts of the Laravel project.
 
-| Screenshot | File |
-|---|---|
-| Home Page | `screenshots/home_page.png` |
-| About Page | `screenshots/about_page.png` |
-| Services Page | `screenshots/services_page.png` |
-| Contact Page | `screenshots/contact_page.png` |
-| Navigation Bar | `screenshots/navbar.png` |
-| Footer | `screenshots/footer.png` |
-| Route Definitions | `screenshots/routes_web.png` |
-| Controller | `screenshots/company_controller.png` |
-| Blade Layout | `screenshots/blade_layout.png` |
+### Home Page
+![Home Page](screenshots/homepage.png)
+
+### About Page
+![About Page](screenshots/about_page.png)
+
+### Services Page
+![Services Page](screenshots/services_page.png)
+
+### Contact Page
+![Contact Page](screenshots/contact_page.png)
+
+### Navigation Bar
+![Navigation Bar](screenshots/nav_bar.png)
+
+### Footer
+![Footer](screenshots/footer.png)
+
+### Route Definitions
+![Route Definitions](screenshots/routes_web.png)
+
+### Controller
+![Controller](screenshots/company_controller.png)
+
+### Blade Layout
+![Blade Layout](screenshots/blade_layout.png)
 
 ---
 
@@ -356,10 +354,10 @@ The MVC architecture can also be applied to larger enterprise systems. A larger 
 
 ## 12. References
 
-Laravel LLC. (2024). *Laravel documentation*. https://laravel.com/docs
+Laravel. (n.d.). *Laravel documentation*. https://laravel.com/docs
 
-Laravel LLC. (2024). *Blade templates*. https://laravel.com/docs/blade
+Laravel. (n.d.). *Blade templates*. https://laravel.com/docs/blade
 
-Laravel LLC. (2024). *Routing*. https://laravel.com/docs/routing
+Laravel. (n.d.). *Routing*. https://laravel.com/docs/routing
 
-Laravel LLC. (2024). *Controllers*. https://laravel.com/docs/controllers
+Laravel. (n.d.). *Controllers*. https://laravel.com/docs/controllers
