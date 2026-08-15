@@ -43,7 +43,7 @@ The main objectives accomplished in this project are:
 
 MVC stands for Model-View-Controller. It is a software architecture pattern that separates an application into three main components, each with a distinct responsibility.
 
-- The **Model** manages the application's data and business logic. It communicates with the database and returns data to the Controller.
+- The **Model** represents and manages application data and interacts with the database.
 - The **View** is responsible for displaying the user interface. It presents data to the user in a readable format using HTML and Blade templates.
 - The **Controller** acts as the middleman between the Model and the View. It receives requests from the browser, processes them, and decides which View to return.
 
@@ -238,7 +238,7 @@ This tells Laravel that the page should use:
 
 ### @section
 
-The `@section` directive defines content that will be placed into a corresponding `@yield` layout.
+The `@section` directive defines a section of content in a child Blade view. The content is inserted into the corresponding `@yield` directive in the layout.
 
 ```blade
 @section('title', 'Home — NexaWorks')
@@ -290,6 +290,8 @@ The `@include` directive inserts another Blade file into the current view. It is
 
 ## 8. Screenshots
 
+The following screenshots document the completed company profile website and important parts of the Laravel project.
+
 | Screenshot | File |
 |---|---|
 | Home Page | `screenshots/home_page.png` |
@@ -306,79 +308,58 @@ The `@include` directive inserts another Blade file into the current view. It is
 
 ## 9. Problems Encountered
 
-### Problem 1: Route Not Found (404 Error)
+### Problem 1: Difficulty Deciding the UI/UX Design
 
-When first setting up the project, visiting `/home` or `/about` returned a 404 error. The browser could not find the requested page.
+One of the first challenges I encountered was deciding on the UI/UX design of the company profile website. I had to consider the layout, colors, typography, navigation, spacing, and overall appearance of the pages. It took some time to decide on a design that was professional, consistent, and suitable for a company profile website.
 
-### Problem 2: View Not Found Error
+### Problem 2: Unexpected Duplicate File in the Project
 
-After creating the controller, Laravel threw a `View [pages.home] not found` error when trying to load the home page.
+Another problem I encountered was an unexpected duplicate project folder/file appearing in the project structure. This caused confusion because there were two similar versions of the project, making it difficult to determine which files were part of the actual Laravel project. I had to inspect the project structure and identify the correct files before continuing with the development.
 
-### Problem 3: Navbar Active Link Not Highlighting
+### Problem 3: Unfamiliarity with Laravel's Project Structure
 
-The active navigation link was not being highlighted when visiting different pages. All links appeared the same regardless of the current page.
+Since I was still becoming familiar with Laravel, understanding the purpose and relationship of its folders and files was initially challenging. I needed to learn where routes, controllers, Blade views, components, and other Laravel files should be placed. Understanding this structure was important for correctly organizing the company profile website.
 
 ---
 
 ## 10. Solutions
 
-### Solution 1: Route Not Found
+### Solution 1: Planning and Refining the UI/UX Design
 
-The issue was that the default `routes/web.php` still pointed to the `welcome` view using a closure instead of the `CompanyController`. The fix was to replace the default route with the proper controller-based routes:
+To solve the difficulty of deciding on the UI/UX design, I explored different layouts and design ideas before choosing the final design. I focused on creating a clean and professional appearance that would be appropriate for a company profile website. I also made sure that the navigation, colors, typography, spacing, and page layouts were consistent throughout the website.
 
-```php
-use App\Http\Controllers\CompanyController;
+### Solution 2: Organizing the Duplicate Project Files
 
-Route::get('/', [CompanyController::class, 'home'])->name('home');
-Route::get('/about', [CompanyController::class, 'about'])->name('about');
-Route::get('/services', [CompanyController::class, 'services'])->name('services');
-Route::get('/contact', [CompanyController::class, 'contact'])->name('contact');
-```
+To solve the issue with the unexpected duplicate file or folder, I inspected the project directory and compared the duplicated files with the actual Laravel project. I identified which folder contained the correct project files and removed the unnecessary duplicate. This helped keep the project structure clean and prevented confusion when working on the application.
 
-### Solution 2: View Not Found
+### Solution 3: Learning the Laravel Project Structure
 
-The error occurred because the `resources/views/pages/` directory did not exist yet. The fix was to create the `pages/` folder inside `resources/views/` and place the Blade view files (`home.blade.php`, `about.blade.php`, `services.blade.php`, `contact.blade.php`) inside it. Laravel uses dot notation to locate views, so `pages.home` maps to `resources/views/pages/home.blade.php`.
-
-### Solution 3: Navbar Active Link
-
-The navbar was using static HTML with no way to detect the current route. The fix was to use Laravel's `request()->routeIs()` helper inside the Blade component to conditionally apply the `active` CSS class:
-
-```blade
-<a class="{{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a>
-```
-
-This checks the current route name and applies the `active` class only when the user is on that page.
+To become more familiar with Laravel's structure, I studied the purpose of the main folders and files used in the project. I learned that routes are defined in `routes/web.php`, controllers are stored in `app/Http/Controllers/`, and Blade views are stored in `resources/views/`. I also learned how layouts and reusable components are organized. Understanding these locations made it easier to navigate the project and organize the files correctly.
 
 ---
 
 ## 11. Reflection
 
-Developing this company profile website using Laravel's MVC architecture was a valuable learning experience that deepened my understanding of how modern web applications are structured and why that structure matters.
+Developing this company profile website using Laravel's MVC architecture helped me understand how a web application can be organized into different parts. Before working on this project, I was not very familiar with Laravel's structure and how its folders, routes, controllers, and views were connected. Through this activity, I gained a better understanding of how Laravel organizes an application and how each part has a specific purpose.
 
-Before this project, I had a general idea of what MVC meant, but working through it hands-on made the concept much clearer. The Model handles data, the View handles presentation, and the Controller handles the logic that connects the two. In this project, since the content is static, there was no need for Models or database interaction. The focus was on understanding how routes, controllers, and Blade views work together to serve pages to the browser.
+One of the most important things I learned about MVC is that it separates an application into different responsibilities. The Model is responsible for data and database-related operations, the View is responsible for displaying the user interface, and the Controller handles application logic and connects requests to the appropriate views. Since the company profile website uses mostly static content, I did not need to create database Models. Instead, I focused mainly on routes, the `CompanyController`, and Blade views.
 
-One of the most important things I learned is the value of separation of concerns. When each part of the application has a single, well-defined responsibility, the code becomes easier to read, easier to debug, and easier to change. For example, if I wanted to update the layout of every page, I only needed to edit `layouts/app.blade.php` — not every individual page file. If I wanted to change a URL, I only needed to update `web.php`. This kind of isolation prevents small changes from causing unexpected problems elsewhere in the application.
+I also learned why separation of concerns is important in software development. When different responsibilities are separated, the project becomes easier to understand, maintain, and modify. For example, the website layout is stored separately from the individual page views. The navbar and footer are also reusable components instead of being copied into every page. This means that if I need to change the navigation bar or footer, I can update the component without manually changing every page. This makes the code more organized and reduces unnecessary duplication.
 
-I also learned how routes, controllers, and views work together as a pipeline. A request from the browser enters through a route, which passes it to a controller method, which then returns a Blade view as the response. Understanding this flow made it much easier to trace errors and understand where each piece of logic belongs.
+Another important lesson was understanding how routes, controllers, and views work together. When a user visits a page through the browser, Laravel first checks the route in `routes/web.php`. The route then calls the appropriate method in `CompanyController`. The controller returns the corresponding Blade view, and Laravel generates the HTML response that is displayed in the browser. Understanding this flow helped me better understand how a Laravel application processes a request.
 
-The use of Blade directives like `@extends`, `@section`, `@yield`, and `@include` showed me how templating engines reduce code duplication. Instead of copying the same navbar and footer HTML into every page, I wrote them once as components and included them in the shared layout. This is a practical application of the DRY principle — Don't Repeat Yourself.
+I also experienced some challenges during development, especially when deciding on the UI/UX design, dealing with an unexpected duplicate project folder, and becoming familiar with Laravel's folder structure. These challenges encouraged me to explore the project more carefully and understand where different files belong.
 
-Looking ahead, I can see how this architecture scales to larger enterprise systems. In a real-world application, the Model layer would connect to a database, controllers would handle authentication, form validation, and business rules, and views would display dynamic data. The same MVC structure that works for four static pages can support hundreds of routes, dozens of controllers, and complex data relationships — because the separation of concerns keeps each layer manageable regardless of how large the system grows.
-
-This project gave me a solid foundation in Laravel and MVC thinking that I can build on in future projects.
+The MVC architecture can also be applied to larger enterprise systems. A larger application may contain many controllers, models, database relationships, and views, but the same separation of responsibilities can still be used. This makes complex applications easier to develop, maintain, and expand. Overall, this project gave me a better foundation in Laravel, Blade, routing, controllers, and MVC architecture that I can apply to future web development projects.
 
 ---
 
 ## 12. References
 
-Laravel LLC. (2024). *Laravel 11.x documentation*. Laravel. https://laravel.com/docs
+Laravel LLC. (2024). *Laravel documentation*. https://laravel.com/docs
 
-PHP Group. (2024). *PHP manual*. PHP. https://www.php.net/manual/en/
+Laravel LLC. (2024). *Blade templates*. https://laravel.com/docs/blade
 
-Mozilla Developer Network. (2024). *MDN web docs*. Mozilla. https://developer.mozilla.org
+Laravel LLC. (2024). *Routing*. https://laravel.com/docs/routing
 
-Otwell, T. (2024). *Blade templates — Laravel*. Laravel. https://laravel.com/docs/blade
-
-Otwell, T. (2024). *Routing — Laravel*. Laravel. https://laravel.com/docs/routing
-
-Otwell, T. (2024). *Controllers — Laravel*. Laravel. https://laravel.com/docs/controllers
+Laravel LLC. (2024). *Controllers*. https://laravel.com/docs/controllers
